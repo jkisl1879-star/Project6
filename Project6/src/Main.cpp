@@ -1,9 +1,7 @@
+#include <iostream>
 
-#include "Engine/Game.h"
-
-int main()
-{
-	Game Game;
-	Game.GameWhile();
+int main() {
+	std::cout << "Hello, World!" << std::endl;
 	return 0;
+
 }
