@@ -7,7 +7,7 @@ bool debug = false;
 bool lifeStatus = true;
 int health = 100;
 int thirst = 0;
-int hunger = 51;
+int hunger = 0;
 static void input() {
 	if (GetAsyncKeyState(VK_ESCAPE) & 1) {
 		isRunning = false;
