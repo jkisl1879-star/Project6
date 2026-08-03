@@ -5,7 +5,7 @@ int tick = 0;
 bool isRunning = true;
 bool debug = false;
 bool lifeStatus = true;
-int health = 100;
+int health = ;
 int thirst = 0;
 int hunger = 0;
 static void input() {
@@ -25,14 +25,14 @@ static void update() {
 	if (thirst > 50) {
 		thirst = 50;
 	}
-	if (tick % 150 == 0) {
+	if (tick % 10 == 0) {
 		thirst++;
 	}
 	//hunger
 	if (hunger > 50) {
 		hunger = 50;
 	}
-	if (tick % 300 == 0) {
+	if (tick % 25 == 0) {
 		hunger++;
 	}
 	//health
@@ -56,8 +56,11 @@ static void handler() {
 
 		if (!lifeStatus) {
 			std::cout << "Вы погибли =(\n";
+			std::cout << "Нажмите ESC чтобы выйти из игры\n";
+			std::cout << "Извините пока что нету системы возрождения\n";
 		}
 		else if (debug) {
+			std::cout << "===Дебаг Меню===\n";
 			std::cout << "Тиков: " << tick << '\n';
 		}
 		else {
