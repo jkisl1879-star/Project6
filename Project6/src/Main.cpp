@@ -5,7 +5,7 @@ int tick = 0;
 bool isRunning = true;
 bool debug = false;
 bool lifeStatus = true;
-int health = ;
+int health = 100;
 int thirst = 0;
 int hunger = 0;
 static void input() {
