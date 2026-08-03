@@ -7,6 +7,7 @@ bool debug = false;
 bool lifeStatus = true;
 int health = 100;
 int thirst = 0;
+int hunger = 51;
 static void input() {
 	if (GetAsyncKeyState(VK_ESCAPE) & 1) {
 		isRunning = false;
@@ -24,13 +25,22 @@ static void update() {
 	if (thirst > 50) {
 		thirst = 50;
 	}
-	if (thirst == 50) {
-		health--;
-	}
 	if (tick % 150 == 0) {
 		thirst++;
 	}
+	//hunger
+	if (hunger > 50) {
+		hunger = 50;
+	}
+	if (tick % 300 == 0) {
+		hunger++;
+	}
 	//health
+	if (hunger == 50 or thirst == 50) {
+		if (tick % 15 == 0) {
+			health--;
+		}
+	}
 	if (health < 0) {
 		health = 0;
 	}
@@ -54,6 +64,7 @@ static void handler() {
 			std::cout << "Открыть дебаг меню на кнопку H\n";
 			std::cout << "Здоровье: " << health << '\n';
 			std::cout << "Жажда: " << thirst << '\n';
+			std::cout << "Голод: " << hunger << '\n';
 		}
 
 		Sleep(150);
