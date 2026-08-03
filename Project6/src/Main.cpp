@@ -4,6 +4,7 @@
 int tick = 0;
 bool isRunning = true;
 bool debug = false;
+bool lifeStatus = true;
 int health = 100;
 int thirst = 0;
 static void input() {
@@ -33,21 +34,28 @@ static void update() {
 	if (health < 0) {
 		health = 0;
 	}
+	if (health == 0) {
+		lifeStatus = false;
+	}
 }
 
 static void handler() {
 	while (isRunning) {
 		update();
 		system("cls");
-		if (debug) {
-			system("cls");
-			std::cout << "Тиков: " << tick << std::endl;
+
+		if (!lifeStatus) {
+			std::cout << "Вы погибли =(\n";
+		}
+		else if (debug) {
+			std::cout << "Тиков: " << tick << '\n';
 		}
 		else {
 			std::cout << "Открыть дебаг меню на кнопку H\n";
-			std::cout << "Здоровье: " << health << std::endl;
-			std::cout << "Жажда: " << thirst << std::endl;
+			std::cout << "Здоровье: " << health << '\n';
+			std::cout << "Жажда: " << thirst << '\n';
 		}
+
 		Sleep(150);
 	}
 	system("cls");
