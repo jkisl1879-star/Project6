@@ -4,6 +4,7 @@
 int tick = 0;
 bool isRunning = true;
 bool debug = false;
+bool shopmenu = false;
 bool lifeStatus = true;
 int health = 100;
 int thirst = 0;
@@ -14,6 +15,9 @@ static void input() {
 	}
 	if (GetAsyncKeyState('H') & 1) {
 		debug = !debug;
+	}
+	if (GetAsyncKeyState('M') & 1) {
+		shopmenu = !shopmenu;
 	}
 }
 
@@ -62,6 +66,11 @@ static void handler() {
 		else if (debug) {
 			std::cout << "===Дебаг Меню===\n";
 			std::cout << "Тиков: " << tick << '\n';
+		}
+		else if (shopmenu) {
+			std::cout << "===МАГАЗИН===\n";
+			std::cout << "Здесь пока ничего нету=(\n";
+			
 		}
 		else {
 			std::cout << "Открыть дебаг меню на кнопку H\n";
