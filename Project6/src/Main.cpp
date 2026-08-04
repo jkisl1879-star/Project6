@@ -73,6 +73,7 @@ static void handler() {
 			
 		}
 		else {
+			std::cout << "Открыть меню магазина на кнопку M\n";
 			std::cout << "Открыть дебаг меню на кнопку H\n";
 			std::cout << "Здоровье: " << health << '\n';
 			std::cout << "Жажда: " << thirst << '\n';
