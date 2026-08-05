@@ -1,96 +1,59 @@
 #include <iostream>
-#include <windows.h>
+#include <Windows.h>
+#include <thread>
+using namespace std;
 
-int tick = 0;
+//APP
 bool isRunning = true;
-bool debug = false;
-bool shopmenu = false;
-bool lifeStatus = true;
+bool debugMenu = false;
+int tick = 0;
+
+//Player Info
 int health = 100;
-int thirst = 0;
-int hunger = 0;
-static void input() {
-	if (GetAsyncKeyState(VK_ESCAPE) & 1) {
+
+
+void input() 
+{
+	//exit
+	if (GetAsyncKeyState(VK_ESCAPE) & 1) 
+	{
 		isRunning = false;
 	}
-	if (GetAsyncKeyState('H') & 1) {
-		debug = !debug;
+	//debug menu
+	if (GetAsyncKeyState('P') & 1)
+	{
+		debugMenu = !debugMenu;
 	}
-	if (GetAsyncKeyState('M') & 1) {
-		shopmenu = !shopmenu;
-	}
+	
 }
 
-static void update() {
-	input();
-	tick++;
 
-	//thirst
-	if (thirst > 50) {
-		thirst = 50;
-	}
-	if (tick % 10 == 0) {
-		thirst++;
-	}
-	//hunger
-	if (hunger > 50) {
-		hunger = 50;
-	}
-	if (tick % 25 == 0) {
-		hunger++;
-	}
-	//health
-	if (hunger == 50 or thirst == 50) {
-		if (tick % 15 == 0) {
-			health--;
-		}
-	}
-	if (health < 0) {
-		health = 0;
-	}
-	if (health == 0) {
-		lifeStatus = false;
-	}
-}
-
-static void handler() {
-	while (isRunning) {
-		update();
+void gameThread()
+{
+	while(isRunning)
+	{
+		input();
+		tick++;
 		system("cls");
+		if (!debugMenu) {
+			cout << "Health: " << health << endl;
 
-		if (!lifeStatus) {
-			std::cout << "Вы погибли =(\n";
-			std::cout << "Нажмите ESC чтобы выйти из игры\n";
-			std::cout << "Извините пока что нету системы возрождения\n";
 		}
-		else if (debug) {
-			std::cout << "===Дебаг Меню===\n";
-			std::cout << "Тиков: " << tick << '\n';
+		if (debugMenu) {
+			cout << "Tick: " << tick << endl;
 		}
-		else if (shopmenu) {
-			std::cout << "===МАГАЗИН===\n";
-			std::cout << "Здесь пока ничего нету=(\n";
-			
-		}
-		else {
-			std::cout << "Открыть меню магазина на кнопку M\n";
-			std::cout << "Открыть дебаг меню на кнопку H\n";
-			std::cout << "Здоровье: " << health << '\n';
-			std::cout << "Жажда: " << thirst << '\n';
-			std::cout << "Голод: " << hunger << '\n';
-		}
-
-		Sleep(150);
+		Sleep(16);
 	}
-	system("cls");
-	std::cout << "Приложение сейчас закроеться\n";
-	Sleep(2000);
 }
 
-int main() {
-	SetConsoleTitleA("Project6");
-	SetConsoleOutputCP(CP_UTF8);
-	SetConsoleCP(CP_UTF8);
-	handler();
+int main()
+{
+	thread t(gameThread);
+	Sleep(3000);
+
+	if (t.joinable()) {
+		t.join();
+	}
 	return 0;
+
 }
