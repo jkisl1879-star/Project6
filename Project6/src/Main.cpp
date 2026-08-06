@@ -90,6 +90,10 @@ int main()
 		{
 			Thirst -= 1;
 		}
+		if(GetAsyncKeyState('E') & 1)
+		{
+			Hunger -= 1;
+		}
 
 		system("cls");
 
@@ -109,6 +113,7 @@ int main()
 			cout << "Hunger: " << Hunger << endl;
 			cout << "Debug menu on the p button" << endl;
 			cout << "remove thirst by pressing the v button" << endl;
+			cout << "To remove hunger, press the E key" << endl;
 		}
 
 		Sleep(16);
