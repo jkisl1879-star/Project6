@@ -17,7 +17,7 @@ int MinHunger = 0;
 
 int Health = 100;
 int Thirst = 0;
-int Hunger = 100;
+int Hunger = 0;
 
 int main()
 {
@@ -65,7 +65,7 @@ int main()
 			Hunger += 1;
 		}
 
-		if (Thirst == 100)
+		if (Thirst >= 100)
 		{
 			if (tick % 50 == 0)
 			{
@@ -73,7 +73,7 @@ int main()
 			}
 		}
 
-		if (Hunger == 100)
+		if (Hunger >= 100)
 		{
 			if (tick % 50 == 0)
 			{
