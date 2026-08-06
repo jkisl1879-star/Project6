@@ -18,6 +18,7 @@ int MinHunger = 0;
 int Health = 100;
 int Thirst = 0;
 int Hunger = 0;
+int Temp = 0;
 
 int main()
 {
@@ -81,6 +82,24 @@ int main()
 			}
 		}
 
+		if(Temp <= -30)
+		{
+			if (tick % 50 == 0)
+			{
+				Health -= 1;
+			}
+		}
+
+		if(tick % 30 == 0)
+		{
+			Temp -= 1;
+		}
+		
+		if(Temp < -30)
+		{
+			Temp = -30;
+		}
+
 		if (GetAsyncKeyState('P') & 1)
 		{
 			debugMenu = !debugMenu;
@@ -100,10 +119,12 @@ int main()
 		if (debugMenu)
 		{
 			cout << "tick: " << tick << endl;
+			cout << "lifeStatus: " << lifeStatus << endl;
 		}
 		else if (lifeStatus == false)
 		{
 			Thirst = 0;
+			Hunger = 0;
 			cout << "You have died" << endl;
 		}		
 		else 
@@ -111,9 +132,14 @@ int main()
 			cout << "Health: " << Health << endl;
 			cout << "Thirst: " << Thirst << endl;
 			cout << "Hunger: " << Hunger << endl;
+			cout << "Temp: " << Temp << endl;
 			cout << "Debug menu on the p button" << endl;
 			cout << "remove thirst by pressing the v button" << endl;
 			cout << "To remove hunger, press the E key" << endl;
+			if(Temp == -30)
+			{
+				cout << "[!] -30C temperature warning" << endl;
+			}
 		}
 
 		Sleep(16);
